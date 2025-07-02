@@ -1,0 +1,39 @@
+stages:
+  clean_and_engineer:
+    cmd: python3 src/data/data_clean_join.py && python3 src/features/engineer_features.py
+    deps:
+      - src/data/data_clean_join.py
+      - src/features/engineer_features.py
+      - data/raw/kaggle_retail_data/
+    outs:
+      - data/processed/train_ready.csv
+      - data/processed/train_features.csv
+
+  train:
+    cmd: python3 src/models/train_model.py
+    deps:
+      - src/models/train_model.py
+      - data/processed/train_features.csv
+    outs:
+      - models/rf_sales_model.pkl
+      - models/metrics.csv
+
+  predict:
+    cmd: python3 src/features/generate_future_features.py && python3 src/models/predict.py
+    deps:
+      - src/features/generate_future_features.py
+      - src/models/predict.py
+      - models/rf_sales_model.pkl
+      - data/processed/future_features.csv
+    outs:
+      - data/predictions/predictions.csv
+
+  report:
+    cmd: python3 src/reports/generate_report.py
+    deps:
+      - src/reports/generate_report.py
+      - data/predictions/predictions.csv
+      - models/shap_summary.png
+      - models/metrics.csv
+    outs:
+      - reports/model_report.md
