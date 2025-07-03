@@ -1,0 +1,5 @@
+[core]
+    remote = gcsremote
+['remote "gcsremote"']
+    url = gs://stores-analysis-464721-stevenson-20250630
+    credentialpath = /Users/stevensondore/Desktop/workspace/45-stores-analysis/configs/stores-analysis-464721-eb7216f322ac.json

@@ -1,6 +1,6 @@
 """
 Module: predict.py
-Purpose: Make predictions using the trained model on new or test data.
+Purpose: Make predictions using the trained model on new or test data. 
 """
 import joblib
 import pandas as pd

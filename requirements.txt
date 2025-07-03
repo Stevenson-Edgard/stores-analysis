@@ -25,6 +25,7 @@ jupyter
 
 # GCP SDK (optional, for cloud integration)
 google-cloud-storage
+google-cloud-bigquery
 
 # Other utilities
 pyyaml

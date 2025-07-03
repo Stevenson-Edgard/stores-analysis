@@ -7,9 +7,16 @@ import subprocess
 from pathlib import Path
 
 @task
-def clean_and_engineer():
-    subprocess.run(["python3", "src/data/data_clean_join.py"], check=True)
-    subprocess.run(["python3", "src/features/engineer_features.py"], check=True)
+def etl_to_gcs_bigquery():
+    subprocess.run([
+        "python3", "-m", "src.etl.etl_gcs_bigquery",
+        "--input", "data/raw/kaggle_retail_data/sales.csv",
+        "--gcs-bucket", "stores-analysis-464721-stevenson-20250630",
+        "--gcs-path", "data/clean/sales_clean.csv",
+        "--bq-dataset", "retail_sales",
+        "--bq-table", "sales_clean",
+        "--gcp-project", "stores-analysis-464721"
+    ], check=True)
 
 @task
 def train():
@@ -26,7 +33,7 @@ def report():
 
 @flow(name="Retail ML Pipeline")
 def retail_pipeline():
-    clean_and_engineer()
+    etl_to_gcs_bigquery()
     train()
     predict()
     report()

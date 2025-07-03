@@ -33,3 +33,18 @@ resource "google_compute_instance" "ml_vm" {
 
   tags = ["ml-pipeline"]
 }
+
+resource "google_bigquery_dataset" "retail_sales" {
+  dataset_id                  = "retail_sales"
+  project                     = var.gcp_project
+  location                    = var.gcp_region
+  delete_contents_on_destroy  = true
+}
+
+resource "google_bigquery_table" "sales_clean" {
+  dataset_id = google_bigquery_dataset.retail_sales.dataset_id
+  table_id   = "sales_clean"
+  project    = var.gcp_project
+
+  schema = jsonencode([]) # Schema will be auto-detected by load job
+}
