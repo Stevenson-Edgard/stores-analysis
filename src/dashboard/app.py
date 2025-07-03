@@ -7,6 +7,7 @@ from pathlib import Path
 from PIL import Image
 
 # Paths
+# Ensure these paths are correct based on your project structure
 METRICS_PATH = Path("models/metrics.csv")
 PREDICTIONS_PATH = Path("data/predictions/predictions.csv")
 SHAP_PLOT_PATH = Path("models/shap_summary.png")
