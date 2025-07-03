@@ -98,3 +98,4 @@ venv-*/
 # Ignore raw data if not versioned
 # /data/raw/
 configs/application_default_credentials.json
+configs/*.json
