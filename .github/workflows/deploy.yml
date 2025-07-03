@@ -58,3 +58,4 @@ jobs:
         # Authentication fix: VM now runs 'gcloud auth configure-docker --quiet' before docker pull
         # Build and Deploy
         # Test CI/CD pipeline
+        # Test CI/CD pipeline
