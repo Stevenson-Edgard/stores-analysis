@@ -1,0 +1,37 @@
+# Core Python packages
+pandas
+numpy
+scikit-learn
+joblib
+matplotlib
+seaborn
+
+# MLflow and DVC
+mlflow
+dvc
+
+# Prefect
+prefect
+
+# Streamlit dashboard
+streamlit
+Pillow
+
+# SHAP for explainability
+shap
+
+# Jupyter (optional, for notebooks)
+jupyter
+
+# GCP SDK (optional, for cloud integration)
+google-cloud-storage
+
+# Other utilities
+pyyaml
+tabulate
+
+# For Airflow (optional, if you use it)
+apache-airflow==2.9.1
+
+# For compatibility
+virtualenv

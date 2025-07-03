@@ -1,0 +1,73 @@
+schema: '2.0'
+stages:
+  clean_and_engineer:
+    cmd: python3 src/data/data_clean_join.py && python3 
+      src/features/engineer_features.py
+    deps:
+    - path: data/raw/kaggle_retail_data/
+      hash: md5
+      md5: 39bf5afe424de48d1da20a8a4e07aa66.dir
+      size: 13865170
+      nfiles: 3
+    - path: src/data/data_clean_join.py
+      hash: md5
+      md5: 9afcf8c33e92dfdaa1cae3e6e85ac7dd
+      size: 2058
+    - path: src/features/engineer_features.py
+      hash: md5
+      md5: fccff0c9e9758689bccdf6f38c0d4eb1
+      size: 2168
+    outs:
+    - path: data/processed/train_features.csv
+      hash: md5
+      md5: c9d04f7d2441dd1ed858ee68b2244244
+      size: 104187081
+    - path: data/processed/train_ready.csv
+      hash: md5
+      md5: a977a4d64408bf6459e3a1c5c3df9148
+      size: 39578625
+  train:
+    cmd: python3 src/models/train_model.py
+    deps:
+    - path: data/processed/train_features.csv
+      hash: md5
+      md5: c9d04f7d2441dd1ed858ee68b2244244
+      size: 104187081
+    - path: src/models/train_model.py
+      hash: md5
+      md5: 5e57f9bdbfed7b4e3d448a07005482d3
+      size: 3750
+    outs:
+    - path: models/metrics.csv
+      hash: md5
+      md5: 0910a249d4b439f6fd8aef8b80283f71
+      size: 67
+    - path: models/rf_sales_model.pkl
+      hash: md5
+      md5: 82273e4d9ee759f310fe176b68406936
+      size: 36815873
+  predict:
+    cmd: python3 src/features/generate_future_features.py && python3 
+      src/models/predict.py
+    deps:
+    - path: data/processed/future_features.csv
+      hash: md5
+      md5: 406a18daf2fec3a4a9cd84fa22a7dfa4
+      size: 9763040
+    - path: models/rf_sales_model.pkl
+      hash: md5
+      md5: 82273e4d9ee759f310fe176b68406936
+      size: 36815873
+    - path: src/features/generate_future_features.py
+      hash: md5
+      md5: 3a65d355f252708362f8401b6d3b4d1d
+      size: 1823
+    - path: src/models/predict.py
+      hash: md5
+      md5: 85b1bdd78bec127a787cbb80d4d1eb14
+      size: 1964
+    outs:
+    - path: data/predictions/predictions.csv
+      hash: md5
+      md5: 6ac89385cf3adda80d68b716f7b47f72
+      size: 10499659

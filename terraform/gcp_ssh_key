@@ -1,0 +1,13 @@
+# This is your private SSH key for GCP VM access.
+# Keep this file secure and never share it publicly.
+# To generate a new key pair, run:
+# ssh-keygen -t rsa -b 4096 -C "your_email@example.com" -f ./terraform/gcp_ssh_key
+
+# Example usage in Terraform:
+# resource "google_compute_instance" "ml_vm" {
+#   ...
+#   metadata = {
+#     ssh-keys = "<username>:${file("${path.module}/gcp_ssh_key.pub")}"
+#   }
+#   ...
+# }
