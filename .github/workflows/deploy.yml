@@ -43,7 +43,13 @@ jobs:
 
       - name: Deploy to GCE VM (example)
         run: |
-          gcloud compute ssh ${{ secrets.GCE_VM_NAME }} --zone=${{ secrets.GCP_ZONE }} --command 'docker pull gcr.io/${{ secrets.GCP_PROJECT }}/retail-ml-pipeline:latest && docker stop retail-ml || true && docker rm retail-ml || true && docker run -d --name retail-ml -p 8501:8501 gcr.io/${{ secrets.GCP_PROJECT }}/retail-ml-pipeline:latest'
+          gcloud compute ssh ${{ secrets.GCE_VM_NAME }} --zone=${{ secrets.GCP_ZONE }} --command '
+            gcloud auth configure-docker --quiet &&
+            docker pull gcr.io/${{ secrets.GCP_PROJECT }}/retail-ml-pipeline:latest &&
+            docker stop retail-ml || true &&
+            docker rm retail-ml || true &&
+            docker run -d --name retail-ml -p 8501:8501 gcr.io/${{ secrets.GCP_PROJECT }}/retail-ml-pipeline:latest
+          '
         env:
           CLOUDSDK_CORE_PROJECT: ${{ secrets.GCP_PROJECT }}
           CLOUDSDK_COMPUTE_REGION: ${{ secrets.GCP_REGION }}
