@@ -56,3 +56,4 @@ jobs:
           CLOUDSDK_COMPUTE_REGION: ${{ secrets.GCP_REGION }}
           CLOUDSDK_COMPUTE_ZONE: ${{ secrets.GCP_ZONE }}
         # Authentication fix: VM now runs 'gcloud auth configure-docker --quiet' before docker pull
+      # Trigger: minor change to rerun GitHub Actions workflow
