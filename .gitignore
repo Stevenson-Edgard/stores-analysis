@@ -99,3 +99,4 @@ venv-*/
 # /data/raw/
 configs/application_default_credentials.json
 configs/*.json
+tmp/
