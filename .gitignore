@@ -70,6 +70,9 @@ mlruns/
 /models/
 /reports/
 
+# Terraform
+terraform/
+
 # Airflow
 airflow/
 
@@ -94,3 +97,4 @@ venv-*/
 
 # Ignore raw data if not versioned
 # /data/raw/
+configs/application_default_credentials.json
