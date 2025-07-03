@@ -57,3 +57,4 @@ jobs:
           CLOUDSDK_COMPUTE_ZONE: ${{ secrets.GCP_ZONE }}
         # Authentication fix: VM now runs 'gcloud auth configure-docker --quiet' before docker pull
         # Build and Deploy
+        # Test CI/CD pipeline
