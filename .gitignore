@@ -100,3 +100,5 @@ venv-*/
 configs/application_default_credentials.json
 configs/*.json
 tmp/
+configs/*.json
+tmp/
