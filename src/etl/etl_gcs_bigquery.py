@@ -58,18 +58,19 @@ def main(args):
     # 3. Join
     df_clean = join_data(sales, stores, features)
 
-    # 4. Save cleaned data to temp file
-    temp_clean_path = "tmp/cleaned_data.csv"
-    os.makedirs(os.path.dirname(temp_clean_path), exist_ok=True)
-    df_clean.to_csv(temp_clean_path, index=False)
+    # 4. Save cleaned data to data/processed
+    processed_dir = "data/processed"
+    os.makedirs(processed_dir, exist_ok=True)
+    clean_path = os.path.join(processed_dir, "cleaned_data.csv")
+    df_clean.to_csv(clean_path, index=False)
 
     # 5. Feature engineering using file paths
-    temp_feat_path = "tmp/feature_engineered.csv"
-    engineer_features(temp_clean_path, temp_feat_path)
-    df_feat = pd.read_csv(temp_feat_path)
+    feat_path = os.path.join(processed_dir, "feature_engineered.csv")
+    engineer_features(clean_path, feat_path)
+    df_feat = pd.read_csv(feat_path)
 
     # 6. Upload to GCS
-    upload_to_gcs(temp_feat_path, args.gcs_bucket, args.gcs_path)
+    upload_to_gcs(feat_path, args.gcs_bucket, args.gcs_path)
     gcs_uri = f"gs://{args.gcs_bucket}/{args.gcs_path}"
 
     # 7. Load to BigQuery
